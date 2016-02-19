@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 public class TLVDecoder {
-
+ 
 	/**
 	 * 解析TLV字节数组
 	 * 
@@ -18,9 +18,9 @@ public class TLVDecoder {
 	 * @return
 	 */
 	public static TLVDecodeResult decode(byte[] tlvBytes) throws Exception {
-		List<TLVDecodeResult> list = new ArrayList<>();
+		List<TLVDecodeResult> list = new ArrayList<>();    
 //		System.out.println("TLV_size:"+getTLVSize(tlvBytes));
-		TLVDecodeResult result = null;
+		TLVDecodeResult result = null; 
 		try {
 			result = decodeImpl(tlvBytes, list);
 		} catch (Exception e) {
@@ -31,7 +31,7 @@ public class TLVDecoder {
 	}
 
 	/**
-	 * 递归逐个解析TLV
+	 * 用递归逐个解析TLV
 	 * 
 	 * @param tlvBytes
 	 * @param list
