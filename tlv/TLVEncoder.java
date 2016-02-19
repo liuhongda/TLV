@@ -189,7 +189,7 @@ public class TLVEncoder {
 	}
 
 	/**
-	 * 计算Tag字节数,推导出来的计算公式
+	 * 计算Tag字节数,经过推导算出来的计算公式
 	 * 
 	 * @param value
 	 * @return
