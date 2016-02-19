@@ -28,7 +28,7 @@ public class TLVUtils {
 	}
 
 	/**
-	 * int转byte[]，高位在前低位在后
+	 * int转成byte[]，高位在前低位在后
 	 * 
 	 * @param value
 	 * @return
