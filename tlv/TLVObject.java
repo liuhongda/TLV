@@ -64,27 +64,6 @@ public class TLVObject {
 		}
 	}
 
-	/*
-	 * public int getInt(int tagValue) { List<TLVDecodeResult> list =
-	 * TLVDecoder.decodeTLV(baos.toByteArray()); int value = -1; for
-	 * (TLVDecodeResult result : list) { if(result.getTagValue() == tagValue) {
-	 * value = result.getIntValue(tagValue); break; } } return value; }
-	 */
-
-	/*
-	 * public String getString(int tagValue) { List<TLVDecodeResult> list =
-	 * TLVDecoder.decodeTLV(baos.toByteArray()); String value = null; for
-	 * (TLVDecodeResult result : list) { if(result.getTagValue() == tagValue) {
-	 * value = result.getStringValue(tagValue); break; } } return value; }
-	 */
-
-	/*
-	 * public TLVDecodeResult get(int tagValue) { List<TLVDecodeResult> list =
-	 * TLVDecoder.decodeTLV(baos.toByteArray()); TLVDecodeResult result = null;
-	 * for (TLVDecodeResult r : list) { if(r.getTagValue() == tagValue) { result
-	 * = r; break; } } return result; }
-	 */
-
 	public int size() {
 		return baos.size();
 	}
