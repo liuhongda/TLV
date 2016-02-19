@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
  */
 public class TLVByteBuffer extends ByteArrayOutputStream{
 
-	private int firstTotalSize = 0;
+	private int firstTotalSize = 0; 
 	
 	private int firstTagSize = 0;
 	
