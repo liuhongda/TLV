@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TLVDecodeResult {
 
-	private int frameType;
+	private int frameType; 
 
 	private int dataType;
 
@@ -21,7 +21,7 @@ public class TLVDecodeResult {
 
 	/**
 	 * <p>
-	 * TLV中的Value的具体值，只可能存在两种类型：
+	 * TLV中的Value的具体值，只有可能存在两种类型：
 	 * </p>
 	 * <p>
 	 * 1.{@link #dataType}=0x20的时候是List<{@link TLVDecodeResult}>类型
