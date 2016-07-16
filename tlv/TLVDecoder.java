@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 public class TLVDecoder {
- 
+
 	/**
 	 * 解析TLV字节数组
 	 * 
@@ -18,27 +18,25 @@ public class TLVDecoder {
 	 * @return
 	 */
 	public static TLVDecodeResult decode(byte[] tlvBytes) throws Exception {
-		List<TLVDecodeResult> list = new ArrayList<>();    
-//		System.out.println("TLV_size:"+getTLVSize(tlvBytes));
-		TLVDecodeResult result = null; 
+		List<TLVDecodeResult> list = new ArrayList<>();
+		TLVDecodeResult result = null;
 		try {
 			result = decodeImpl(tlvBytes, list);
 		} catch (Exception e) {
 			throw e;
 		}
-		// System.out.println("list:"+list);
 		return result;
 	}
 
 	/**
-	 * 用递归逐个解析TLV
+	 * 递归逐个解析TLV
 	 * 
 	 * @param tlvBytes
 	 * @param list
 	 * @return
 	 */
 	private static TLVDecodeResult decodeImpl(byte[] tlvBytes,
-			List<TLVDecodeResult> list) {
+											  List<TLVDecodeResult> list) {
 		if (tlvBytes == null || tlvBytes.length == 0) {
 			return null;
 		}
@@ -84,7 +82,7 @@ public class TLVDecoder {
 	 * @return
 	 */
 	private static TLVDecodeResult decodeFirstTLV(byte[] tagBytes,
-			byte[] lengthBytes, byte[] valueBytes) {
+												  byte[] lengthBytes, byte[] valueBytes) {
 		int dataType = decodeDataType(tagBytes);
 		TLVDecodeResult result = new TLVDecodeResult();
 		result.setFrameType(decodeFrameType(tagBytes));
@@ -115,17 +113,12 @@ public class TLVDecoder {
 	 * @param list
 	 */
 	private static TLVDecodeResult decodeSecondTLV(byte[] tlvBytes,
-			int firstTLVSize, List<TLVDecodeResult> list) {
+												   int firstTLVSize, List<TLVDecodeResult> list) {
 		int totalSize = tlvBytes.length;
 		byte[] nextBytes = new byte[totalSize - firstTLVSize];
 		System.arraycopy(tlvBytes, firstTLVSize, nextBytes, 0, totalSize
 				- firstTLVSize);
 		TLVDecodeResult result = decodeImpl(nextBytes, list);
-
-		/*
-		 * if (result.getTagValue() == 0) {
-		 * System.err.println("RID:"+result.getIntValue()); }
-		 */
 
 		return result;
 	}

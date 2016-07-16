@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
  */
 public class TLVByteBuffer extends ByteArrayOutputStream{
 
-	private int firstTotalSize = 0; 
+	private int firstTotalSize = 0;
 	
 	private int firstTagSize = 0;
 	
@@ -20,9 +20,12 @@ public class TLVByteBuffer extends ByteArrayOutputStream{
 	 * @return
 	 */
 	public synchronized boolean hasNextTLVData() {
+		if (count == 0) {
+			return false;
+		}
+
 		compute();
 		if (firstTotalSize > 0 && count > 0 && firstTotalSize <= count) {
-//            LogUtil.i("tlv bytes firstTotalSize:" + firstTotalSize + ",buffer written bytes count:" + count);
 			return true;
 		} else {
 			return false;

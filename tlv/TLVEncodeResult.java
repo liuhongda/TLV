@@ -23,7 +23,7 @@ public class TLVEncodeResult {
 	private byte[] valueBytes;
 
 	/**
-	 * 将Tag,Length,Value的字节数组按顺序组合成TLV字节数组的形式
+	 * 将Tag,Length,Value的字节数组按顺序组合成TLV字节数组形式
 	 * 
 	 * @return
 	 */

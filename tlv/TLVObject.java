@@ -1,6 +1,6 @@
 package com.xtc.sync.tlv;
 
-import com.xtc.sync.util.SyncLogUtil;
+import com.xtc.sync.log.SyncLogUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class TLVObject {
 	}
 
 	public TLVObject put(int tagValue, long value) {
-		writeValue(tagValue, TLVUtils.varIntToByteArray(value));
+		writeValue(tagValue, TLVUtils.longToByteArray(value));
 		return this;
 	}
 

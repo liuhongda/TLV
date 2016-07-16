@@ -38,7 +38,7 @@ public class TLVEncoder {
 	 * @return
 	 */
 	public static TLVEncodeResult encode(int frameType, int dataType,
-			int tagValue, byte[] value) {
+										 int tagValue, byte[] value) {
 		byte[] tagBytes = encodeTag(frameType, dataType, tagValue);
 		// System.out.println("tag:"+new BigInteger(1, tagBytes).toString(2));
 
@@ -66,7 +66,7 @@ public class TLVEncoder {
 	 * @return
 	 */
 	public static TLVEncodeResult encode(int frameType, int dataType,
-			int tagValue, String value) {
+										 int tagValue, String value) {
 		if (value != null)
 			return encode(frameType, dataType, tagValue, value.getBytes());
 		else
@@ -74,9 +74,9 @@ public class TLVEncoder {
 	}
 
 	public static TLVEncodeResult encode(int frameType, int dataType,
-			int tagValue, long value) {
+										 int tagValue, long value) {
 		return encode(frameType, dataType, tagValue,
-				TLVUtils.varIntToByteArray(value));
+				TLVUtils.longToByteArray(value));
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class TLVEncoder {
 	}
 
 	/**
-	 * 计算Tag字节数,经过推导算出来的计算公式
+	 * 计算Tag字节数,推导出来的计算公式
 	 * 
 	 * @param value
 	 * @return
