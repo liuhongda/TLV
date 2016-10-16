@@ -16,13 +16,13 @@ public class TLVDecoder {
      * @param tlvBytes
      * @return
      */
-    public static TLVDecodeResult decode(byte[] tlvBytes) throws Exception {
+    public static TLVDecodeResult decode(byte[] tlvBytes) throws Throwable {
         List<TLVDecodeResult> list = new ArrayList<>();
         TLVDecodeResult result = null;
         try {
             result = decodeImpl(tlvBytes, list);
-        } catch (Exception e) {
-            throw e;
+        } catch (Throwable throwable) {
+            throw throwable;
         }
         return result;
     }
@@ -34,8 +34,7 @@ public class TLVDecoder {
      * @param list
      * @return
      */
-    private static TLVDecodeResult decodeImpl(byte[] tlvBytes,
-                                              List<TLVDecodeResult> list) {
+    private static TLVDecodeResult decodeImpl(byte[] tlvBytes, List<TLVDecodeResult> list) {
         if (tlvBytes == null || tlvBytes.length == 0) {
             return null;
         }
@@ -80,8 +79,7 @@ public class TLVDecoder {
      * @param valueBytes
      * @return
      */
-    private static TLVDecodeResult decodeFirstTLV(byte[] tagBytes,
-                                                  byte[] lengthBytes, byte[] valueBytes) {
+    private static TLVDecodeResult decodeFirstTLV(byte[] tagBytes, byte[] lengthBytes, byte[] valueBytes) {
         int dataType = decodeDataType(tagBytes);
         TLVDecodeResult result = new TLVDecodeResult();
         result.setFrameType(decodeFrameType(tagBytes));
@@ -111,14 +109,11 @@ public class TLVDecoder {
      * @param firstTLVSize
      * @param list
      */
-    private static TLVDecodeResult decodeSecondTLV(byte[] tlvBytes,
-                                                   int firstTLVSize, List<TLVDecodeResult> list) {
+    private static TLVDecodeResult decodeSecondTLV(byte[] tlvBytes, int firstTLVSize, List<TLVDecodeResult> list) {
         int totalSize = tlvBytes.length;
         byte[] nextBytes = new byte[totalSize - firstTLVSize];
-        System.arraycopy(tlvBytes, firstTLVSize, nextBytes, 0, totalSize
-                - firstTLVSize);
+        System.arraycopy(tlvBytes, firstTLVSize, nextBytes, 0, totalSize - firstTLVSize);
         TLVDecodeResult result = decodeImpl(nextBytes, list);
-
         return result;
     }
 

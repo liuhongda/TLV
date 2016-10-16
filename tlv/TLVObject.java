@@ -80,8 +80,8 @@ public class TLVObject {
         String result = null;
         try {
             result = TLVDecoder.decode(baos.toByteArray()).toString();
-        } catch (Exception e) {
-            SyncLogUtil.e(e);
+        } catch (Throwable throwable) {
+            SyncLogUtil.e(throwable);
         }
         return result;
     }

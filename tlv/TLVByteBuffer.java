@@ -1,6 +1,7 @@
 package com.xtc.sync.tlv;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * TLV字节数据缓冲区
@@ -8,11 +9,11 @@ import java.io.ByteArrayOutputStream;
  */
 public class TLVByteBuffer extends ByteArrayOutputStream {
 
-    private int firstTotalSize = 0;
+    private volatile int firstTotalSize = 0;
 
-    private int firstTagSize = 0;
+    private volatile int firstTagSize = 0;
 
-    private int firstLengthSize = 0;
+    private volatile int firstLengthSize = 0;
 
     /**
      * 检测是否已经有第一个完整的TLV字节数据
@@ -40,6 +41,16 @@ public class TLVByteBuffer extends ByteArrayOutputStream {
         firstLengthSize = 0;
     }
 
+    @Override
+    public synchronized void close() throws IOException {
+        super.close();
+    }
+
+    @Override
+    public synchronized void write(byte[] buffer, int offset, int len) {
+        super.write(buffer, offset, len);
+    }
+
     /**
      * 将第一个完整的tlv字节数据截取出来并从缓存中抹除这个tlv字节数据，此方法可以正确的截取第一个完整的TLV数据包，能够解决TCP连接的粘包问题
      * 这里我是用字节数据流来实现的，其实后来看了下NIO发现也能采用ByteBuffer,并且会在一定程度上提升写数据的效率
@@ -59,6 +70,8 @@ public class TLVByteBuffer extends ByteArrayOutputStream {
             reset();
             write(tmp, 0, tmp.length);
             data = tlvBytes;
+        } else {
+            System.err.println("firstTotalSize:" + firstTotalSize + ",count:" + count + ",firstTotalSize must smaller than count!");
         }
         return data;
     }
